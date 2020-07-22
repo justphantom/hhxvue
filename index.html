@@ -4,16 +4,24 @@
 		<meta charset="utf-8" />
 		<title>Home</title>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/axios.min.js" type="text/javascript" charset="UTF-8"></script>
 	</head>
 	<body>
 		<div id="app">
-			{{ message }}
+			{{ info }}
 		</div>
 		<script>
-			var app = new Vue({
-				el: '#app',
-				data: {
-					message: "Hello Vue",
+			new Vue({
+				el:'#app',
+				data(){
+					return {
+						info:null
+					}
+				},
+				mounted(){
+					axios
+					.get('http://cnhuhx.wicp.net/api/post/')
+					.then(response=>(this.info=response))
 				}
 			})
 		</script>
