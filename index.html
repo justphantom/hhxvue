@@ -8,20 +8,25 @@
 	</head>
 	<body>
 		<div id="app">
-			{{ info }}
+			<h1>Post List</h1>
+			<div v-for="post in posts">
+				<h2>{{ post.title }}</h2>
+				<span>{{ post.created_time }}</span>
+				<span>{{ post.excerpt }}</span>
+			</div>
 		</div>
 		<script>
 			new Vue({
-				el:'#app',
-				data(){
+				el: '#app',
+				data() {
 					return {
-						info:null
+						posts: null
 					}
 				},
-				mounted(){
+				mounted() {
 					axios
-					.get('http://cnhuhx.wicp.net/api/post/')
-					.then(response=>(this.info=response))
+						.get('/api/post/')
+						.then(response => (this.posts = response.data.results))
 				}
 			})
 		</script>
